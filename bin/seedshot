@@ -9,7 +9,7 @@ if (/darwin/.test(platform)){
         "$(curl -F 'file=@screenshot.jpg' http://seedshot.io)) " +
         "&& rm screenshot.jpg")
 } else {
-  spawn("screencapture -i screenshot.jpg && " +
+  spawn("scrot -s screenshot.jpg && " +
         "xdg-open $(node -pe '\"http://seedshot.io/\" " +
         "+ JSON.parse(process.argv[1]).uuid' " + 
         "$(curl -F 'file=@screenshot.jpg' http://seedshot.io)) " +
