@@ -4,6 +4,12 @@ CLI tool for [Seedshot](http://seedshot.io).
 
 Currently only OSX is supported.
 
+## Install
+
+```
+npm install -g seedshot-cli
+```
+
 ## License
 
 MIT
