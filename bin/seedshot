@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+var spawn = require("child_process").exec
+
+spawn("screencapture -i screenshot.jpg && " +
+      "open $(node -pe '\"http://seedshot.io/\" " +
+      "+ JSON.parse(process.argv[1]).uuid' " + 
+      "$(curl -F 'file=@screenshot.jpg' http://seedshot.io)) " +
+      "&& rm screenshot.jpg")
