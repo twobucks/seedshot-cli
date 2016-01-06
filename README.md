@@ -2,7 +2,9 @@
 
 CLI tool for [Seedshot](http://seedshot.io). 
 
-Currently only OSX is supported.
+Supported platforms:
+* OSX
+* Linux
 
 ## Install
 
