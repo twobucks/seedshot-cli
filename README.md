@@ -10,6 +10,12 @@ Currently only OSX is supported.
 npm install -g seedshot-cli
 ```
 
+## Usage
+
+```
+seedshot
+```
+
 ## License
 
 MIT
