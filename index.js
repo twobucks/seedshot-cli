@@ -20,7 +20,12 @@ module.exports = function(){
   }
 
   // take the screenshot
-  exec(screenshotCommand + " " + screenshotPath)
+  try {
+    exec(screenshotCommand + " " + screenshotPath)
+  } catch (e){
+    // pressing escape or command+c should not throw errors
+    return
+  }
 
   // upload screenshot to the server
   request.post({
