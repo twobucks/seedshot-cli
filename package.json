@@ -6,10 +6,16 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["seedshot", "screenshot"],
+  "keywords": [
+    "seedshot",
+    "screenshot"
+  ],
   "author": "Hrvoje Simic <hrvoje@twobucks.co>",
   "license": "MIT",
   "bin": {
     "seedshot": "bin/seedshot"
+  },
+  "dependencies": {
+    "request": "^2.74.0"
   }
 }
