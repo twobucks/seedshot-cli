@@ -1,16 +1,17 @@
-var exec = require("child_process").execSync
-var platform = require('os').platform()
-var path = require('path')
-var tmpdir = require('os').tmpdir()
-var request = require('request')
-var fs = require('fs')
+"use strict"
+const exec = require("child_process").execSync
+const platform = require('os').platform()
+const path = require('path')
+const tmpdir = require('os').tmpdir()
+const request = require('request')
+const fs = require('fs')
 
-var host = process.env.SEEDSHOT_HOST || 'http://seedshot.io/'
-var screenshotPath = path.join(tmpdir, 'screenshot.jpg')
-var screenshotCommand = undefined
-var openCommand = undefined
+const host = process.env.SEEDSHOT_HOST || 'http://seedshot.io/'
+const screenshotPath = path.join(tmpdir, 'screenshot.jpg')
+let screenshotCommand = undefined
+let openCommand = undefined
 
-module.exports = function(){
+function seedshot() {
   if (/darwin/.test(platform)){
     screenshotCommand = "screencapture -i"
     openCommand = "open"
@@ -21,7 +22,7 @@ module.exports = function(){
 
   // take the screenshot
   try {
-    exec(screenshotCommand + " " + screenshotPath)
+    exec(`${screenshotCommand} ${screenshotPath}`)
   } catch (e){
     // pressing escape or command+c should not throw errors
     return
@@ -31,16 +32,19 @@ module.exports = function(){
   request.post({
     url: host,
     formData: { file: fs.createReadStream(screenshotPath)}
-  }, function(err, httpResponse, body){
+  }, (err, httpResponse, body) => {
     if (err) {
       return console.error('upload failed:', err)
     }
-    var uuid =  JSON.parse(body).uuid
-
+    const uuid = JSON.parse(body).uuid
+    const imagePath = path.join(host, uuid)
     // open the browser
-    exec(openCommand + " " + path.join(host, uuid))
+    exec(`${openCommand} ${imagePath}`)
 
     // remove the screenshot
     fs.unlink(screenshotPath)
   })
+
 }
+
+module.exports = seedshot

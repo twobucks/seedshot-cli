@@ -1,6 +1,6 @@
 {
   "name": "seedshot-cli",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "description": "Command line tool for seedshot.io",
   "main": "index.js",
   "scripts": {
