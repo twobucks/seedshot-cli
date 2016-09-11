@@ -6,12 +6,11 @@ const tmpdir = require('os').tmpdir()
 const request = require('request')
 const fs = require('fs')
 
-const host = process.env.SEEDSHOT_HOST || 'http://seedshot.io/'
-const screenshotPath = path.join(tmpdir, 'screenshot.jpg')
-let screenshotCommand = undefined
-let openCommand = undefined
 
-function seedshot() {
+function getPlatform() {
+  let screenshotCommand = undefined
+  let openCommand = undefined
+
   if (/darwin/.test(platform)){
     screenshotCommand = "screencapture -i"
     openCommand = "open"
@@ -19,16 +18,13 @@ function seedshot() {
     screenshotCommand = "scrot -s"
     openCommand = "xdg-open"
   }
-
-  // take the screenshot
-  try {
-    exec(`${screenshotCommand} ${screenshotPath}`)
-  } catch (e){
-    // pressing escape or command+c should not throw errors
-    return
+  return {
+    screenshotCommand,
+    openCommand
   }
+}
 
-  // upload screenshot to the server
+function uploadPhoto(host, screenshotPath, openCommand) {
   request.post({
     url: host,
     formData: { file: fs.createReadStream(screenshotPath)}
@@ -44,7 +40,22 @@ function seedshot() {
     // remove the screenshot
     fs.unlink(screenshotPath)
   })
+}
 
+function seedshot() {
+  const host = process.env.SEEDSHOT_HOST || 'http://seedshot.io/'
+  const screenshotPath = path.join(tmpdir, 'screenshot.jpg')
+  const plat = getPlatform()
+  // take the screenshot
+  try {
+    exec(`${plat.screenshotCommand} ${screenshotPath}`)
+  } catch (e){
+    // pressing escape or command+c should not throw errors
+    return
+  }
+
+  // upload screenshot to the server
+  uploadPhoto(host, screenshotPath, plat.openCommand)
 }
 
 module.exports = seedshot
