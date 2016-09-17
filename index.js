@@ -6,7 +6,6 @@ const tmpdir = require('os').tmpdir()
 const request = require('request')
 const fs = require('fs')
 
-
 function getPlatform() {
   let screenshotCommand = undefined
   let openCommand = undefined
@@ -45,17 +44,17 @@ function uploadPhoto(host, screenshotPath, openCommand) {
 function seedshot() {
   const host = process.env.SEEDSHOT_HOST || 'http://seedshot.io/'
   const screenshotPath = path.join(tmpdir, 'screenshot.jpg')
-  const plat = getPlatform()
+  const platform = getPlatform()
   // take the screenshot
   try {
-    exec(`${plat.screenshotCommand} ${screenshotPath}`)
+    exec(`${platform.screenshotCommand} ${screenshotPath}`)
   } catch (e){
     // pressing escape or command+c should not throw errors
     return
   }
 
   // upload screenshot to the server
-  uploadPhoto(host, screenshotPath, plat.openCommand)
+  uploadPhoto(host, screenshotPath, platform.openCommand)
 }
 
 module.exports = seedshot
