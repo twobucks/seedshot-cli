@@ -1,7 +1,7 @@
 {
   "name": "seedshot-cli",
   "version": "1.1.0",
-  "description": "Command line tool for seedshot.io",
+  "description": "Command line tool for https://zapsnap.io",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
