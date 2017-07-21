@@ -6,6 +6,8 @@ const tmpdir = require('os').tmpdir()
 const request = require('request')
 const fs = require('fs')
 
+const HOST = 'https://zapsnap.io'
+
 function getPlatform() {
   let screenshotCommand = undefined
   let openCommand = undefined
@@ -42,7 +44,7 @@ function uploadPhoto(host, screenshotPath, openCommand) {
 }
 
 function seedshot() {
-  const host = process.env.SEEDSHOT_HOST || 'http://seedshot.io/'
+  const host = process.env.SEEDSHOT_HOST || HOST
   const screenshotPath = path.join(tmpdir, 'screenshot.jpg')
   const platform = getPlatform()
   // take the screenshot
