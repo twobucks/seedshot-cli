@@ -1,9 +1,10 @@
 # Seedshot CLI
 
-CLI tool for [Seedshot](http://seedshot.io). 
+CLI tool for [Zapsnap](http://zapsnap.io). 
 
 Supported platforms:
-* OSX
+
+* MacOS
 * Linux
 
 ## Install
@@ -24,8 +25,6 @@ MIT
 
 ## Sponsors
 
-Two Bucks Ltd © 2016
+Two Bucks Ltd © 2017
 
-<a href="https://twobucks.co">
-![https://twobucks.co](https://twobucks.co/assets/images/logo-small.png)
-</a>
+[![https://twobucks.co](https://twobucks.co/assets/images/logo-small.png)](https://twobucks.co)
